@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { ICategory } from "../types/types";
 
 const categorySchema = new mongoose.Schema({
     category:{
@@ -7,5 +8,5 @@ const categorySchema = new mongoose.Schema({
     },
 },{timestamps:true})
 
-const Category = mongoose.model("categories",categorySchema)
+const Category = mongoose.model<ICategory>("categories",categorySchema)
 export default Category

@@ -16,8 +16,8 @@ const AddCategory = (props: Props) => {
                     "Content-Type":"application/json"
                 }
             })
-            const new_category = await Response.json()
-            console.log(new_category)
+            // const new_category = await response.ok
+            // console.log(new_category)
         }
         catch(error){
 
