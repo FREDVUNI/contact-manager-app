@@ -1,5 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
+import connect from "../database/connect"
 const app = express()
 
 dotenv.config({path:'.env'})
@@ -9,6 +10,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+connect()
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`)
+  console.log(`app is listening on port ${PORT}`)
 })
