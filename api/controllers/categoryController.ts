@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import Category from "../models/Category";
 import Joi from 'joi'
 
-const addCategory = async(req:Request,res:Response) =>{
+export const addCategory = async(req:Request,res:Response) =>{
     try{
         const schema = Joi.object({
             category: Joi.string().required().min(3)
@@ -21,11 +21,19 @@ const addCategory = async(req:Request,res:Response) =>{
         })
 
         await saveCategory.save()
-        res.status(201).json('category has been saved.')
+        res.status(201).json({success:true, message:'category has been saved.'})
     }
-    catch(error){
-        res.status(500).json(error)
+    catch(error:any){
+        res.status(500).json({error:error.message})
     }
 }
 
-export default addCategory
+export const getCategories = async(req:Request,res:Response) =>{
+    try{
+        const categories = await Category.find({})
+        res.status(200).json(categories)
+    }
+    catch(error:any){
+        res.status(500).json({error:error.message})
+    }
+}
