@@ -31,8 +31,8 @@ const AddCategory:React.FC = (props: Props) => {
             const data = await response.json()
             if (response.ok) {
                setCategory({category:""})
-               toast.success(data);
-               setCategories([ ...categories,data ])
+               toast.success(data.message);
+               setCategories([ ...categories,data.data ])
                console.log(data)
              } else {
                // setError(data);
@@ -68,7 +68,7 @@ const AddCategory:React.FC = (props: Props) => {
                   </label>
                   <button
                       type="submit"
-                      className="inline-block border bg-orange-500 text-dark px-12 pt-2 py-4 pb-[6px] mt-5 text-sm font-medium uppercase ">
+                      className="inline-block border bg-orange-500 text-dark px-12  pt-2 py-4 pb-[6px] mt-5 font-medium uppercase ">
                       save
                     </button>
                   </form>

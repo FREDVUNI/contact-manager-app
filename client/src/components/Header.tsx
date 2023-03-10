@@ -5,7 +5,7 @@ type Props = {}
 
 const Header = (props: Props) => {
   return (
-    <header className='px-6 lg:px-12'>
+    <header className='px-8 lg:px-12'>
   <nav
     className="relative flex w-full items-center justify-between bg-white py-2 text-neutral-600 shadow-sm hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 dark:text-neutral-200 md:flex-wrap md:justify-start"
     data-te-navbar-ref>
