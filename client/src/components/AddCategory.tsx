@@ -1,15 +1,16 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useContext} from 'react'
 import { category } from '../types/category.types'
 import Category from './Category'
 import {BASE_URL} from '../config'
 import { toast } from 'react-toastify'
+import { CategoriesContext } from '../context'
 
 type Props = {}
 const inputStyles = 'my-2 w-full px-5 py-3 border border-solid border-neutral-300 bg-transparent bg-clip-padding text-base font-normal text-neutral-700 outline-none placeholder:text-neutral-500'
 
 const AddCategory:React.FC = (props: Props) => {
     const [category,setCategory] = useState<category>({category:""})
-    const [categories,setCategories] = useState([])
+    const { categories,setCategories } = useContext(CategoriesContext)
 
    //  const [error,setError] = useState(false)
 
@@ -28,9 +29,10 @@ const AddCategory:React.FC = (props: Props) => {
                 },
             })
             const data = await response.json()
-
             if (response.ok) {
                setCategory({category:""})
+               toast.success(data);
+               setCategories([ ...categories,data ])
                console.log(data)
              } else {
                // setError(data);
@@ -41,22 +43,6 @@ const AddCategory:React.FC = (props: Props) => {
             return console.log(error)
         }
     }
-
-    useEffect(() =>{
-      const getCategories = async() =>{
-         try{
-            const res = await fetch(`${BASE_URL}/category/categories`)
-            const data = await res.json()
-            setCategories(data)
-
-            console.log(data)
-         }
-         catch(error){
-            return console.log(error)
-         }
-       }
-       getCategories()
-    },[])
 
   return (
     <div className='grid min-h-full bg-white px-6 sm:py-30 lg:px-8'>

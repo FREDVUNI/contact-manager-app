@@ -3,11 +3,13 @@ import Footer from "./components/Footer"
 import Header from "./components/Header"
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter as Router,Route,Routes } from 'react-router-dom'
+import { CategoriesProvider } from "./context";
 
 function App() {
 
   return (
     <div className="App">
+      <CategoriesProvider>
       <ToastContainer/>
       <Header/>
       <Router>
@@ -16,6 +18,7 @@ function App() {
         </Routes>
       </Router>
       <Footer/>
+      </CategoriesProvider>
     </div>
   )
 }
