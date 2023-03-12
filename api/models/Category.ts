@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
-import { ICategory } from "../types/types";
 
 const categorySchema = new mongoose.Schema({
     category:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
 },{timestamps:true})
 
-const Category = mongoose.model<ICategory>("categories",categorySchema)
+const Category = mongoose.model("categories",categorySchema)
 export default Category

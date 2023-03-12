@@ -21,7 +21,11 @@ export const addCategory = async(req:Request,res:Response) =>{
         })
 
         const new_category = await saveCategory.save()
-        res.status(201).json({success:true, message:'category has been saved.',data:new_category})
+        res.status(201).json({
+            success:true,
+            message:'category has been saved.',
+            data:new_category
+        })
     }
     catch(error:any){
         res.status(500).json({error:error.message})
@@ -40,7 +44,7 @@ export const getCategories = async(req:Request,res:Response) =>{
 
 export const deleteCategory = async(req:Request,res:Response) =>{
     try{
-        const id = req.params.id
+        const { id } = req.body
 
         const categories = Category.findOne({
             _id:id
@@ -51,7 +55,11 @@ export const deleteCategory = async(req:Request,res:Response) =>{
         const category = await Category.findByIdAndDelete(id)
 
         if(category){
-            return res.status(200).json('category has been deleted.')
+            return res.status(200).json({
+                success:true,
+                data:category,
+                message:'category has been deleted.'
+            })
         }else{
             return res.status(404).json('category was not found.')
         }

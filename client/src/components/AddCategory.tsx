@@ -49,9 +49,9 @@ const AddCategory:React.FC = (props: Props) => {
    <div className="bg-white py-18 sm:py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
          <div className="mx-auto max-w-2xl lg:mx-0">
+            <div className="grid lg:grid-cols-2 items-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Manage Your <span className='text-orange-500'>Contacts</span></h2>
             <p className="mt-2 text-lg leading-8 text-gray-600">Add contact category here.</p>
-            <div className="flex">
                {/* {error && <span>{error}</span> } */}
                <div className="relative mt-5 mb-3 xl:w-96">
                   <form onSubmit={handleSubmit}>
@@ -73,6 +73,7 @@ const AddCategory:React.FC = (props: Props) => {
                     </button>
                   </form>
                </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos similique ipsam at, velit obcaecati officiis magni nostrum fugiat vel facilis libero. Accusamus, autem? Adipisci, facere omnis? In quasi amet excepturi.</p>
             </div>
          </div>
          <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-y-16 gap-x-8 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaTrash,FaEye } from 'react-icons/fa'
+import { BASE_URL } from '../config'
+import { toast } from 'react-toastify'
 
 type Props = {
     category:string,
@@ -11,6 +13,31 @@ type Props = {
 }
 
 const Category = ({category,categoryId,name,number,description}: Props) => {
+    const handleDelete = async(e:any) =>{
+        e.preventDefault()
+        try{
+            const res = await fetch(`${BASE_URL}/category/delete`,{
+                method:"DELETE",
+                body: JSON.stringify({categoryId}),
+                headers:{
+                    "Content-Type":"application/json"
+                }
+            })
+
+            const data = await res.json()
+            if (res.ok) {
+               toast.success(data.message);
+               return await data
+             } else {
+               toast.error(data);
+             }
+
+        }
+        catch(error){
+            return console.log(error)
+        }
+    }
+
   return (
     <article className="flex max-w-xl flex-col items-start justify-between">
         <div className="flex items-center gap-x-4 text-xs">
@@ -39,10 +66,8 @@ const Category = ({category,categoryId,name,number,description}: Props) => {
                         <FaEye/>
                     </Link>
                 </span>
-                <span className="z-10 bg-gray-150 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-100">
-                    <Link to={`/category/${categoryId}`}>
-                        <FaTrash/>
-                    </Link>
+                <span onClick={handleDelete} className="cursor-pointer z-10 bg-gray-150 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-100">
+                    <FaTrash/>
                 </span>
                 </div>
             </div>
