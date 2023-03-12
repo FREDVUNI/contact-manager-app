@@ -4,6 +4,7 @@ import Category from './Category'
 import {BASE_URL} from '../config'
 import { toast } from 'react-toastify'
 import { CategoriesContext } from '../context'
+import hero from '../assets/hero.svg'
 
 type Props = {}
 const inputStyles = 'my-2 w-full px-5 py-3 border border-solid border-neutral-300 bg-transparent bg-clip-padding text-base font-normal text-neutral-700 outline-none placeholder:text-neutral-500'
@@ -46,14 +47,15 @@ const AddCategory:React.FC = (props: Props) => {
 
   return (
     <div className='grid min-h-full bg-white px-6 sm:py-30 lg:px-8'>
-   <div className="bg-white py-18 sm:py-20">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-         <div className="mx-auto max-w-2xl lg:mx-0">
-            <div className="grid lg:grid-cols-2 items-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Manage Your <span className='text-orange-500'>Contacts</span></h2>
-            <p className="mt-2 text-lg leading-8 text-gray-600">Add contact category here.</p>
-               {/* {error && <span>{error}</span> } */}
-               <div className="relative mt-5 mb-3 xl:w-96">
+      <div className="px-6 py-12 md:px-12 text-gray-800 text-center lg:text-left">
+      <div className="container">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="mt-12 lg:mt-0">
+            <h2 className="text-3xl mb-5 font-bold tracking-tight text-gray-900 sm:text-4xl">Manage Your <span className='text-orange-500'>Contacts</span></h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias temporibus ex, totam quam, aspernatur mollitia nihil ab illum minus recusandae inventore quos ipsa necessitatibus maiores eum itaque in ducimus quae?</p>
+            <p className="mt-5 text-lg leading-8 text-gray-600">Add contact category here.</p>
+            {/* {error && <span>{error}</span> } */}
+            <div className="relative mt-5 mb-3 xl:w-96">
                   <form onSubmit={handleSubmit}>
                   <input
                      type="text"
@@ -68,14 +70,25 @@ const AddCategory:React.FC = (props: Props) => {
                   </label>
                   <button
                       type="submit"
-                      className="inline-block border bg-orange-500 text-dark px-12  pt-2 py-4 pb-[6px] mt-5 font-medium uppercase ">
+                      className="inline-block border w-full bg-orange-500 text-dark px-12  pt-2 py-4 pb-[6px] mt-5 font-medium uppercase ">
                       save
                     </button>
                   </form>
                </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos similique ipsam at, velit obcaecati officiis magni nostrum fugiat vel facilis libero. Accusamus, autem? Adipisci, facere omnis? In quasi amet excepturi.</p>
-            </div>
-         </div>
+          </div>
+          <div className="mb-12 lg:mb-0">
+            <img
+              src={hero}
+              className="w-full rounded-lg"
+              alt="hero"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+   <div className="bg-white py-18 sm:py-20">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
          <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-y-16 gap-x-8 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             { 
                categories && categories.map((item:any) =>(
