@@ -91,9 +91,12 @@ const AddCategory:React.FC = (props: Props) => {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
          <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-y-16 gap-x-8 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             { 
-               categories && categories.map((item:any) =>(
-                  <Category key={item._id} categoryId={item._id} category={item.category} name={item.name} description={item.description} number={item.number}/>
-               ))
+               categories && categories.length > 0 ?
+                  categories && categories.map((item:any) =>(
+                     <Category key={item._id} categoryId={item._id} category={item.category} name={item.name} description={item.description} number={item.number}/>
+                  ))
+               :
+               <p className='text-gray-600 text-lg'>There are no contacts available.</p>
             }
          </div>
       </div>

@@ -1,8 +1,10 @@
-import React from 'react'
+import React,{ useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FaTrash,FaEye } from 'react-icons/fa'
 import { BASE_URL } from '../config'
 import { toast } from 'react-toastify'
+import { CategoriesContext } from '../context'
+import { category } from '../types/category.types'
 
 type Props = {
     category:string,
@@ -13,11 +15,14 @@ type Props = {
 }
 
 const Category = ({category,categoryId,name,number,description}: Props) => {
+    const { categories,setCategories } = useContext(CategoriesContext)
+
     const handleDelete = async(e:any) =>{
         e.preventDefault()
         try{
             const res = await fetch(`${BASE_URL}/category/delete`,{
                 method:"DELETE",
+                mode: 'cors',
                 body: JSON.stringify({categoryId}),
                 headers:{
                     "Content-Type":"application/json"
@@ -27,7 +32,9 @@ const Category = ({category,categoryId,name,number,description}: Props) => {
             const data = await res.json()
             if (res.ok) {
                toast.success(data.message);
-               return await data
+                const filterCatgory = categories && categories.filter((item:any) => item._id != categoryId)
+                // console.log(filterCatgory)
+                return setCategories(filterCatgory)
              } else {
                toast.error(data);
              }

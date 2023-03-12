@@ -44,15 +44,15 @@ export const getCategories = async(req:Request,res:Response) =>{
 
 export const deleteCategory = async(req:Request,res:Response) =>{
     try{
-        const { id } = req.body
+        const { categoryId } = req.body
 
         const categories = Category.findOne({
-            _id:id
+            _id:categoryId
         })
 
         if(!categories) return res.status(404).json('category was not found.')
 
-        const category = await Category.findByIdAndDelete(id)
+        const category = await Category.findByIdAndDelete(categoryId)
 
         if(category){
             return res.status(200).json({
