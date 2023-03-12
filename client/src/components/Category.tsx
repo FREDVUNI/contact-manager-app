@@ -60,13 +60,13 @@ const Category = ({category,categoryId,name,number,description}: Props) => {
                 Michael Foster
                 </a>
                 </p>
-                <div className='flex text-lg mt-5'>
-                <span className="z-10 bg-gray-150 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-100">
+                <div className='flex text-lg mt-5 gap-3'>
+                <span className="z-10 bg-gray-150 py-1.5 px-3 font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">
                     <Link to={`/category/${categoryId}`}>
                         <FaEye/>
                     </Link>
                 </span>
-                <span onClick={handleDelete} className="cursor-pointer z-10 bg-gray-150 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-100">
+                <span onClick={handleDelete} className="cursor-pointer z-10 bg-gray-150 py-1.5 px-3 font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">
                     <FaTrash/>
                 </span>
                 </div>
