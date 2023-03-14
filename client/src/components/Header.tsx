@@ -61,7 +61,7 @@ const Header = (props: Props) => {
           <li data-te-nav-item-ref>
             <Link
               className="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-              to="/"
+              to="/pricing"
               data-te-nav-link-ref
               data-te-ripple-init
               data-te-ripple-color="light">Pricing</Link>
@@ -69,7 +69,7 @@ const Header = (props: Props) => {
           <li data-te-nav-item-ref>
             <Link
               className="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-              to="/"
+              to="/about"
               data-te-nav-link-ref
               data-te-ripple-init
               data-te-ripple-color="light">About</Link>
