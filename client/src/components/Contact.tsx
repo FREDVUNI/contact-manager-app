@@ -61,7 +61,7 @@ const Contact = (props: Props) => {
                 setTitle({title:""})
                 console.log(data)
             }else{
-                toast.error(data.data)
+                toast.error(data)
             }
         }
         catch(error:any){
@@ -79,7 +79,7 @@ const Contact = (props: Props) => {
                   <form onSubmit={handleSubmit}>
                   <input
                      onChange={handleChange}
-                     value={title.title}
+                     value={ title.title}
                      type="text"
                      name="title"
                      className={"peer block min-h-[auto] w-full border border-solid border-neutral-300 bg-transparent py-2 px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"} />

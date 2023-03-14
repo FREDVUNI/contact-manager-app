@@ -102,6 +102,12 @@ export const updateCategory = async(req:Request,res:Response) =>{
 
         const { title } = req.body
 
+        const schema = Joi.object({
+            title: Joi.string().required().min(3)
+        })
+
+        const {error} = schema.validate(req.body)
+        if(error) return res.status(400).json(error.details[0].message)
 
         const categories = Category.findOne({
             _id:categoryId
