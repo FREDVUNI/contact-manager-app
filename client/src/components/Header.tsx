@@ -43,36 +43,36 @@ const Header = (props: Props) => {
           className="mr-auto flex flex-col lg:flex-row"
           data-te-navbar-nav-ref>
           <li data-te-nav-item-ref>
-            <a
+            <Link
               className="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-              href="/"
+              to="/"
               data-te-nav-link-ref
               data-te-ripple-init
-              data-te-ripple-color="light">Home</a>
+              data-te-ripple-color="light">Home</Link>
           </li>
           <li data-te-nav-item-ref>
-            <a
+            <Link
               className="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-              href="/features"
+              to="/features"
               data-te-nav-link-ref
               data-te-ripple-init
-              data-te-ripple-color="light">Features</a>
+              data-te-ripple-color="light">Features</Link>
           </li>
           <li data-te-nav-item-ref>
-            <a
+            <Link
               className="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-              href="#!"
+              to="/"
               data-te-nav-link-ref
               data-te-ripple-init
-              data-te-ripple-color="light">Pricing</a >
+              data-te-ripple-color="light">Pricing</Link>
           </li>
           <li data-te-nav-item-ref>
-            <a
+            <Link
               className="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-              href="#!"
+              to="/"
               data-te-nav-link-ref
               data-te-ripple-init
-              data-te-ripple-color="light">About</a>
+              data-te-ripple-color="light">About</Link>
           </li>
         </ul>
       </div>

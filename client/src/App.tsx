@@ -7,17 +7,22 @@ import { CategoriesProvider } from "./context";
 import Contact from "./components/Contact";
 import NotFound from "./components/NotFound";
 
-function App() {
+type Props = {
+  title:string,
+  categoryId:string
+}
+
+function App({title,categoryId}:Props) {
 
   return (
     <div className="App">
       <CategoriesProvider>
       <ToastContainer/>
-      <Header/>
       <Router>
+      <Header/>
         <Routes>
           <Route path="/" element={<AddCategory/>}/>
-          <Route path="/contact/:categoryId" element={<Contact/>}/>
+          <Route path="/contact/:categoryId" element={<Contact title={title} categoryId={categoryId}/>}/>
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </Router>
