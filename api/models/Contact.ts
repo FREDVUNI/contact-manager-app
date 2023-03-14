@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const contactSchema = new mongoose.Schema({
-    category:{
-        type:mongoose.Types.ObjectId,refs:"Category",
-        required:true
-    },
     name:{
         type:String,
         required:true

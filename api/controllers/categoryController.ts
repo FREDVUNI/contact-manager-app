@@ -68,3 +68,61 @@ export const deleteCategory = async(req:Request,res:Response) =>{
         res.status(500).json({error:'category was not found.'})
     }
 }
+
+export const getCategory = async(req:Request,res:Response) =>{
+    try{
+        const {categoryId} = req.params
+
+        const categories = Category.findOne({
+            _id:categoryId
+        })
+
+        if(!categories) return res.status(404).json('category was not found.')
+
+        const category = await Category.findById(categoryId)
+
+        if(category){
+            return res.status(200).json({
+                success:true,
+                data:category,
+            })
+        }else{
+            return res.status(404).json('category was not found.')
+        }
+
+    }
+    catch(error:any){
+        res.status(500).json({error:'category was not found.'})
+    }
+}
+
+export const updateCategory = async(req:Request,res:Response) =>{
+    try{
+        const {categoryId} = req.params
+
+        const { title } = req.body
+
+
+        const categories = Category.findOne({
+            _id:categoryId
+        })
+
+        if(!categories) return res.status(404).json('category was not found.')
+
+        const category = await Category.findByIdAndUpdate({_id:categoryId,category:title},{new:true})
+
+        if(category){
+            return res.status(200).json({
+                success:true,
+                data:category,
+                message:'category has been updated.'
+            })
+        }else{
+            return res.status(404).json('category was not found.')
+        }
+
+    }
+    catch(error:any){
+        res.status(500).json({error:'category was not found.'})
+    }
+}
