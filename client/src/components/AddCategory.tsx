@@ -52,7 +52,7 @@ const AddCategory:React.FC = (props: Props) => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="mt-12 lg:mt-0">
             <h2 className="text-3xl mb-5 font-bold tracking-tight text-gray-900 sm:text-4xl">Manage Your <span className='text-orange-500'>Contacts</span></h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias temporibus ex, totam quam, aspernatur mollitia nihil ab illum minus recusandae inventore quos ipsa necessitatibus maiores eum itaque in ducimus quae?</p>
+            <p>With Contact Manger, you can manage all of your contacts in one place, making it easier than ever to stay in touch with friends, family, and colleagues. Our app is designed to be user-friendly and intuitive, with a sleek interface that makes it easy to find what you're looking for.</p>
             <p className="mt-5 text-lg leading-8 text-gray-600">Add contact category here.</p>
             {/* {error && <span>{error}</span> } */}
             <div className="relative mt-5 mb-3 xl:w-96">
