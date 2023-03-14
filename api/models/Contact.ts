@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 
 const contactSchema = new mongoose.Schema({
-    categoryId:{
-        type:String,
+    category:{
+        type:mongoose.Schema.Types.ObjectId,
+        refs:"Category",
         required:true
     },
     name:{
@@ -20,5 +21,5 @@ const contactSchema = new mongoose.Schema({
 
 },{timestamps:true})
 
-const Contact = mongoose.model("contacts",contactSchema)
+const Contact = mongoose.model("Contact",contactSchema)
 export default Contact

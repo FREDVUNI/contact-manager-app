@@ -35,6 +35,8 @@ export const addCategory = async(req:Request,res:Response) =>{
 export const getCategories = async(req:Request,res:Response) =>{
     try{
         const categories = await Category.find({})
+        .populate('contacts')
+        .exec()
         res.status(200).json(categories)
     }
     catch(error:any){

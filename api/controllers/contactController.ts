@@ -6,7 +6,7 @@ export const addContact = async(req:Request,res:Response) =>{
     try{
 
         const schema = Joi.object({
-            categoryId:Joi.string().min(3).max(200).required(),
+            category:Joi.string().min(3).max(200).required(),
             name:Joi.string().min(3).max(200).required(),
             description:Joi.string().min(3).max(500).required(),
             number:Joi.string().min(3).max(200).required(),
@@ -16,15 +16,15 @@ export const addContact = async(req:Request,res:Response) =>{
 
         if(error) return res.status(400).json(error.details[0].message)
 
-        const { name,description,number,categoryId } = req.body
+        const { name,description,number,category } = req.body
 
-        if(!categoryId) return res.status(400).json('category was not found.')
+        if(!category) return res.status(400).json('category was not found.')
 
         const check_contact = await Contact.findOne({name})
         if(check_contact) return res.status(400).json(`contact with name ${name.toLowerCase()} already exists.`)
 
         const contact = new Contact({
-            categoryId,
+            category,
             name,
             description,
             number
@@ -35,6 +35,15 @@ export const addContact = async(req:Request,res:Response) =>{
             data:new_contact,
             message:'contact has been saved.'
         })
+
+    }
+    catch(error:any){
+        res.status(500).json({error:error.message})
+    }
+}
+
+export const getContacts = async(req:Request,res:Response) =>{
+    try{
 
     }
     catch(error:any){
