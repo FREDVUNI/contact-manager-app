@@ -25,5 +25,5 @@ categorySchema.pre("remove",function(this: any,next){
     })
 })
 
-const Category = mongoose.model("categories",categorySchema)
+const Category = mongoose.model("Category",categorySchema)
 export default Category
