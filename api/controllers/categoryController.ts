@@ -109,7 +109,12 @@ export const updateCategory = async(req:Request,res:Response) =>{
 
         if(!categories) return res.status(404).json('category was not found.')
 
-        const category = await Category.findByIdAndUpdate({_id:categoryId,category:title},{new:true})
+        const check_category = await Category.findOne({category:title})
+        if(check_category) return res.status(400).json(`category ${title.toLowerCase()} already exists.`)
+
+        const category = await Category.findByIdAndUpdate(
+            {_id:categoryId},{category:title},{new:true}
+        )
 
         if(category){
             return res.status(200).json({
