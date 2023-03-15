@@ -136,10 +136,10 @@ const Contact = (props: Props) => {
             </div>
             <div className="container">
                 <p className='text-xl text-black'>Contact</p>
-                <div className="relative mt-5 mb-3 xl:w-97">
+                <div className="relative mt-5 mb-3 xl:w-98">
                   <form onSubmit={handleContactSubmit}>
                   <div className="grid grid-cols-1 gap-2 lg:grid-cols-1">
-                    <input type="hidden" name='category' value={categoryId} onChange={handleChange}/>
+                    <input type="hidden" name='category' value={categoryId}/>
                   <input
                      onChange={handleChange}
                      value={contact.name}
