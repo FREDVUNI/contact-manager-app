@@ -1,8 +1,10 @@
-import React,{useState,useEffect, ChangeEvent} from 'react'
+import React,{useState,useEffect, ChangeEvent, useContext} from 'react'
 import { useParams,useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { BASE_URL } from '../config'
-import { Icategory } from '../types/category.types'
+import { ICategory } from '../types/category.types'
+import { IContact } from '../types/contact.types'
+import { CategoriesContext } from '../context'
 
 type Props = {
     title:string,
@@ -10,11 +12,19 @@ type Props = {
 }
 
 const Contact = (props: Props) => {
-    const { categoryId } = useParams()
+    const inputStyles = 'my-2 w-full px-5 py-3 border border-solid border-neutral-300 bg-transparent bg-clip-padding text-base font-normal text-neutral-700 outline-none placeholder:text-neutral-500'
+    const { categoryId } = useParams<{categoryId:string}>()
     const navigate = useNavigate()
 
-    const [category,setCategory] = useState<Icategory>()
-    const [title,setTitle] = useState<Icategory>({title:""})
+    const [category,setCategory] = useState<ICategory>()
+    const [title,setTitle] = useState<ICategory>({title:""})
+    const { setCategories,categories } = useContext(CategoriesContext)
+
+    const [contact,setContact] = useState<IContact>({
+        name:"",
+        number:"",
+        description:"",
+    })
 
     useEffect(() =>{
         const getCatgory = async() =>{
@@ -37,10 +47,12 @@ const Contact = (props: Props) => {
             }
         }
         getCatgory()
+        window.scroll(0,0)
     },[])
 
     const handleChange = (e:any) =>{
         setTitle((prev) => ({...prev,[e.target.name]:e.target.value}))
+        setContact((prev) =>({...prev,[e.target.name]:e.target.value}))
     }
 
     const handleSubmit = async(e:React.FormEvent<HTMLFormElement | HTMLTextAreaElement>) =>{
@@ -58,6 +70,10 @@ const Contact = (props: Props) => {
             if(response.ok){
                 toast.success(data.message);
                 setCategory(data.data)
+
+                const filter = categories && categories.filter((item:any) => item._id !== data.data._id)
+                setCategories([...filter,data.data])
+
                 setTitle({title:""})
                 console.log(data)
             }else{
@@ -70,24 +86,20 @@ const Contact = (props: Props) => {
     }
 
   return (
-    <div className='flex flex-col justify-center items-center'>
-        <div className="px-12 py-12 md:px-12 text-gray-800 lg:text-left">
-            <div className="container">
+    <div className='grid place-items-center min-h-full bg-white px-6 sm:py-30 lg:px-8'>
+        <div className="px-12 py-12 md:px-12 text-gray-800 lg:text-left grid lg:grid-cols-1 gap-12 items-center">
+            <div className="container justify-center">
                 <p className='text-xl text-black'>{category?.category}</p>
 
-                <div className="relative mt-5 mb-3 xl:w-96">
+                <div className="relative mt-5 mb-3 xl:w-97">
                   <form onSubmit={handleSubmit}>
                   <input
                      onChange={handleChange}
-                     value={ title.title}
+                     value={title.title}
+                     name='title'
                      type="text"
-                     name="title"
-                     className={"peer block min-h-[auto] w-full border border-solid border-neutral-300 bg-transparent py-2 px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"} />
-                  <label
-                     htmlFor="category"
-                     className="pointer-events-none absolute top-0 left-3 mb-3 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-700 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-neutral-200"
-                     >update category
-                  </label>
+                     placeholder="Enter updated category"
+                     className={inputStyles} />
                   <button
                       type="submit"
                       className="inline-block border w-full bg-orange-500 text-dark px-12  pt-2 py-4 pb-[6px] mt-5 font-medium uppercase ">
@@ -97,24 +109,29 @@ const Contact = (props: Props) => {
                </div>
             </div>
             <div className="container">
-                <p className='text-xl text-black'>{category?.category}</p>
-
-                <div className="relative mt-5 mb-3 xl:w-96">
+                <p className='text-xl text-black'>Contact</p>
+                <div className="relative mt-5 mb-3 xl:w-97">
                   <form onSubmit={handleSubmit}>
+                  <div className="grid grid-cols-1 gap-2 lg:grid-cols-1">
                   <input
                      onChange={handleChange}
-                     value={ title.title}
+                     value={contact.name}
+                     name='name'
                      type="text"
-                     name="title"
-                     className={"peer block min-h-[auto] w-full border border-solid border-neutral-300 bg-transparent py-2 px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"} />
-                  <label
-                     htmlFor="category"
-                     className="pointer-events-none absolute top-0 left-3 mb-3 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-700 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-neutral-200"
-                     >update category
-                  </label>
+                     placeholder="Enter contact name"
+                     className={inputStyles} />
+                  <input
+                     onChange={handleChange}
+                     value={contact.number}
+                     name='number'
+                     type="text"
+                     placeholder="Enter contact number"
+                     className={inputStyles} />
+                  </div>
+                  <textarea value={contact.description} onChange={handleChange} className={inputStyles} name="description" id="" cols={30} rows={10} placeholder='Enter description'></textarea>
                   <button
                       type="submit"
-                      className="inline-block border w-full bg-orange-500 text-dark px-12  pt-2 py-4 pb-[6px] mt-5 font-medium uppercase ">
+                      className="inline-block border w-full bg-orange-500 text-dark px-12  pt-2 pb-[6px] mt-5 font-medium uppercase ">
                       save
                     </button>
                   </form>

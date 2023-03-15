@@ -1,13 +1,9 @@
 import React, { useState, createContext, useEffect } from 'react'
 import { BASE_URL } from '../config';
+import { CategoriesContextType } from '../types/category.types';
 
 type Props = {
   children: React.ReactNode,
-}
-
-interface CategoriesContextType {
-  categories: any;
-  setCategories: (categories: any) => void;
 }
 
 export const CategoriesContext = createContext<CategoriesContextType>({

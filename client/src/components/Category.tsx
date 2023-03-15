@@ -4,7 +4,7 @@ import { FaTrash,FaEye } from 'react-icons/fa'
 import { BASE_URL } from '../config'
 import { toast } from 'react-toastify'
 import { CategoriesContext } from '../context'
-import { category } from '../types/category.types'
+import { ICategory } from '../types/category.types'
 
 type Props = {
     category:string,
