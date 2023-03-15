@@ -1,5 +1,4 @@
 import React,{useState,useContext} from 'react'
-import { ICategory } from '../types/category.types'
 import Category from './Category'
 import {BASE_URL} from '../config'
 import { toast } from 'react-toastify'
@@ -7,6 +6,11 @@ import { CategoriesContext } from '../context'
 import hero from '../assets/hero.svg'
 
 type Props = {}
+
+type ICategory ={
+  category:string
+}
+
 const inputStyles = 'my-2 w-full px-5 py-3 border border-solid border-neutral-300 bg-transparent bg-clip-padding text-base font-normal text-neutral-700 outline-none placeholder:text-neutral-500'
 
 const AddCategory:React.FC = (props: Props) => {
