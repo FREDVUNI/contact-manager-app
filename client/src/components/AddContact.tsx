@@ -35,14 +35,19 @@ const AddContact = ({category}: Props) => {
             const data = await response.json()
             if(response.ok){
                 toast.success(data.message);
-                setContact(data.data)
+                setContact({
+                    name:"",
+                    number:"",
+                    description:"",
+                    category:""
+                })
             }else{
                 toast.error(data)
             }
+            window.scroll(0,0)
         }
         catch(error:any){
             console.log(error.message)
-            console.log(error)
         }
     }
   return (
