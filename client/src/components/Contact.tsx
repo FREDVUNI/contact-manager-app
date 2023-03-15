@@ -24,6 +24,7 @@ const Contact = (props: Props) => {
         name:"",
         number:"",
         description:"",
+        category:""
     })
 
     useEffect(() =>{
@@ -55,7 +56,7 @@ const Contact = (props: Props) => {
         setContact((prev) =>({...prev,[e.target.name]:e.target.value}))
     }
 
-    const handleSubmit = async(e:React.FormEvent<HTMLFormElement | HTMLTextAreaElement>) =>{
+    const handleCategorySubmit = async(e:React.FormEvent<HTMLFormElement | HTMLTextAreaElement>) =>{
         e.preventDefault()
         try{
             const response = await fetch(`${BASE_URL}/category/${categoryId}`,{
@@ -85,6 +86,31 @@ const Contact = (props: Props) => {
         }
     }
 
+    const handleContactSubmit = async(e: React.FormEvent<HTMLFormElement | HTMLTextAreaElement>) =>{
+        e.preventDefault();
+        try{
+            const response = await fetch(`${BASE_URL}/contact/add`,{
+                mode:"cors",
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(contact)
+            })
+
+            const data = await response.json()
+            if(response.ok){
+                toast.success(data.message);
+                setContact(data.data)
+            }else{
+                toast.error(data)
+            }
+        }
+        catch(error:any){
+            console.log(error.message)
+        }
+    }
+
   return (
     <div className='grid place-items-center min-h-full bg-white px-6 sm:py-30 lg:px-8'>
         <div className="px-12 py-12 md:px-12 text-gray-800 lg:text-left grid lg:grid-cols-1 gap-12 items-center">
@@ -92,7 +118,7 @@ const Contact = (props: Props) => {
                 <p className='text-xl text-black'>{category?.category}</p>
 
                 <div className="relative mt-5 mb-3 xl:w-97">
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleCategorySubmit}>
                   <input
                      onChange={handleChange}
                      value={title.title}
@@ -111,8 +137,9 @@ const Contact = (props: Props) => {
             <div className="container">
                 <p className='text-xl text-black'>Contact</p>
                 <div className="relative mt-5 mb-3 xl:w-97">
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleContactSubmit}>
                   <div className="grid grid-cols-1 gap-2 lg:grid-cols-1">
+                    <input type="hidden" name='category' value={categoryId} onChange={handleChange}/>
                   <input
                      onChange={handleChange}
                      value={contact.name}

@@ -7,7 +7,7 @@ export const addContact = async(req:Request,res:Response) =>{
     try{
 
         const schema = Joi.object({
-            category:Joi.string().min(3).max(200).required(),
+            category:Joi.string().min(3).max(200),
             name:Joi.string().min(3).max(200).required(),
             description:Joi.string().min(3).max(500).required(),
             number:Joi.string().min(3).max(200).required(),

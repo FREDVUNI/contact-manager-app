@@ -1,5 +1,6 @@
 export interface IContact{
     name:string,
     number:string,
-    description:string
+    description:string,
+    category:string
 }
