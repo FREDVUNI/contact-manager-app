@@ -1,3 +1,5 @@
+import { IContacts } from "./contact.types";
+
 export interface ITitle{
     title:string
 }
@@ -8,6 +10,7 @@ export interface ICategory{
     description:string,
     name:string,
     categoryId:string,
+    contacts: IContacts[]
 }
 
 export interface CategoriesContextType {

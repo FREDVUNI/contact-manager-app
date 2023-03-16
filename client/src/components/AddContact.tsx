@@ -1,7 +1,7 @@
 import React,{ useState } from 'react'
 import { toast } from 'react-toastify'
 import { BASE_URL } from '../config'
-import { IContact } from '../types/contact.types'
+import { INewContact } from '../types/contact.types'
 
 type Props = {
     category:string
@@ -9,7 +9,7 @@ type Props = {
 
 const AddContact = ({category}: Props) => {
     const inputStyles = 'my-2 w-full px-5 py-3 border border-solid border-neutral-300 bg-transparent bg-clip-padding text-base font-normal text-neutral-700 outline-none placeholder:text-neutral-500'
-    const [contact,setContact] = useState<IContact>({
+    const [contact,setContact] = useState<INewContact>({
         name:"",
         number:"",
         description:"",

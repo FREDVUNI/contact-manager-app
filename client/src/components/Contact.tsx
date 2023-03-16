@@ -3,19 +3,21 @@ import { useParams,useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { BASE_URL } from '../config'
 import { ICategory, ITitle } from '../types/category.types'
-import { IContact } from '../types/contact.types'
 import { CategoriesContext } from '../context'
 import AddContact from './AddContact'
+import Contacts from './Contacts'
+import { IContact } from '../types/contact.types'
 
 type Props = {}
 
-const Contact = (props: Props) => {
+const Contact = ({}: Props) => {
     const inputStyles = 'my-2 w-full px-5 py-3 border border-solid border-neutral-300 bg-transparent bg-clip-padding text-base font-normal text-neutral-700 outline-none placeholder:text-neutral-500'
     const { categoryId } = useParams<{categoryId:string}>()
     const navigate = useNavigate()
 
-    const [category,setCategory] = useState<ICategory>({category:"",categoryId:"",description:"",name:"",number:""})
+    const [category,setCategory] = useState<ICategory>({category:"",categoryId:"",description:"",name:"",number:"",contacts:[]})
     const [title,setTitle] = useState<ITitle>({title:""})
+    const [contacts,setContacts] = useState<IContact>()
     const { setCategories,categories } = useContext(CategoriesContext)
 
     useEffect(() =>{
@@ -101,42 +103,7 @@ const Contact = (props: Props) => {
             <AddContact category={category.category}/>
         </div>
         <div className="flex lg:flex-col px-12 py-12 md:px-12">
-        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-            <div className="overflow-hidden">
-                <table className="min-w-full text-left text-sm font-light">
-                <thead className="border-b font-medium dark:border-neutral-500">
-                    <tr>
-                    <th scope="col" className="px-6 py-4">#</th>
-                    <th scope="col" className="px-6 py-4">First</th>
-                    <th scope="col" className="px-6 py-4">Last</th>
-                    <th scope="col" className="px-6 py-4">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr className="border-b dark:border-neutral-500">
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">1</td>
-                    <td className="whitespace-nowrap px-6 py-4">Mark</td>
-                    <td className="whitespace-nowrap px-6 py-4">Otto</td>
-                    <td className="whitespace-nowrap px-6 py-4">@mdo</td>
-                    </tr>
-                    <tr className="border-b dark:border-neutral-500">
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">2</td>
-                    <td className="whitespace-nowrap px-6 py-4">Jacob</td>
-                    <td className="whitespace-nowrap px-6 py-4">Thornton</td>
-                    <td className="whitespace-nowrap px-6 py-4">@fat</td>
-                    </tr>
-                    <tr className="border-b dark:border-neutral-500">
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">3</td>
-                    <td className="whitespace-nowrap px-6 py-4">Larry</td>
-                    <td className="whitespace-nowrap px-6 py-4">Wild</td>
-                    <td className="whitespace-nowrap px-6 py-4">@twitter</td>
-                    </tr>
-                </tbody>
-                </table>
-            </div>
-            </div>
-        </div>
+        <Contacts category={category.category} contacts={category.contacts.map(item => item)}/>
         </div>
     </div>
   )
