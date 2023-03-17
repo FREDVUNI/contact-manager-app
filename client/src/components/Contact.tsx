@@ -27,7 +27,7 @@ const Contact = ({}: Props) => {
 
                 const data = await response.json()
                 if (response.ok) {
-                    console.log(response)
+                    console.log(data.data)
                     setCategory(data.data)
                 } else {
                     // setError(data);
@@ -42,7 +42,7 @@ const Contact = ({}: Props) => {
         }
         getCatgory()
         window.scroll(0,0)
-    },[])
+    },[categoryId])
 
     const handleChange = (e:any) =>{
         setTitle((prev) => ({...prev,[e.target.name]:e.target.value}))
@@ -100,10 +100,10 @@ const Contact = ({}: Props) => {
                   </form>
                </div>
             </div>
-            <AddContact category={category.category}/>
+            <AddContact category={category.contacts}/>
         </div>
         <div className="flex lg:flex-col px-12 py-12 md:px-12">
-        <Contacts category={category.category} contacts={category.contacts.map(item => item)}/>
+        <Contacts category={category.category} contacts={category.contacts}/>
         </div>
     </div>
   )

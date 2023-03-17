@@ -45,7 +45,7 @@ export const addContact = async(req:Request,res:Response) =>{
         // Update the category's contacts array
         await Category.findOneAndUpdate(
             {_id: categoryId},
-            {$push: {contacts: new_contact._id}}
+            {$push: {contacts: {_id:new_contact._id}}}
         );
 
         res.status(200).json({

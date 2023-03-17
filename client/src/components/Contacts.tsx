@@ -19,11 +19,11 @@ const Contacts = ({category,contacts}: IContact) => {
                 const data =  await res.json()
 
                 if(res.ok){
-                    const filterContacts = data && data.filter((item:any) => item._id === contacts)
+                    // const filterContacts = data && data.filter((item:any) => item.category._id === "64141bbd5f687bf2aad8cf4a")
 
-                    setContact(filterContacts)
-                    console.log(filterContacts)
-                    
+                    // setContact(filterContacts) 
+                    console.log(contacts)
+                    // console.log(data.filter((item:any) => item.category))
                 }else{
                     toast.error(data)
                 }
@@ -33,7 +33,7 @@ const Contacts = ({category,contacts}: IContact) => {
             }
         }
         getContacts()
-        console.log(contacts)
+        // console.log(contacts)
     },[])
 
   return (

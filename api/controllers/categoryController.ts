@@ -80,8 +80,7 @@ export const getCategory = async(req:Request,res:Response) =>{
         })
 
         if(!categories) return res.status(404).json('category was not found.')
-
-        const category = await Category.findById(categoryId)
+        const category = await Category.findById(categoryId).populate('contacts').exec();
 
         if(category){
             return res.status(200).json({
