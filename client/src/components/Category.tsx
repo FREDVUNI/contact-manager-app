@@ -1,4 +1,4 @@
-import React,{ useContext } from 'react'
+import React,{ useState,useContext,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FaTrash,FaEye } from 'react-icons/fa'
 import { BASE_URL } from '../config'
@@ -11,12 +11,41 @@ type Props = {
     name:string,
     number:string,
     description:string,
-    categoryId:string
+    categoryId:string,
+    contacts:contacts[]
 }
 
-const Category = ({category,categoryId,name,number,description}: Props) => {
-    const { categories,setCategories } = useContext(CategoriesContext)
+type contacts={
+    _id:string,
+    category:string,
+    name:string,
+    number:string,
+    description:string,
+}
 
+const Category = ({category,categoryId,name,number,description,contacts}: Props) => {
+    const [contact,setContact] = useState()
+
+    const { categories,setCategories } = useContext(CategoriesContext)
+    useEffect(() =>{
+        const getContacts = async() =>{
+            try{
+                const res = await fetch(`${BASE_URL}/contact/contacts`)
+                const data = await res.json()
+                setContact(data)
+                console.log(contacts)
+            }
+            catch(error:any){
+                console.log(error)
+            }
+        }
+        getContacts()
+    },[categoryId])
+
+    // const filterContacts = contacts && contacts.filter((item:contacts) => item.category)
+    // setContact(filterContacts)
+    // console.log(filterContacts.map((c:contacts) =>( c.name,c.category,c.description,c.name)))
+    // console.log(filterContacts)
     const handleDelete = async(e:any) =>{
         e.preventDefault()
         try{
@@ -51,13 +80,7 @@ const Category = ({category,categoryId,name,number,description}: Props) => {
             <Link to={`/contact/${categoryId}`} title="view contact" className="relative z-10 rounded-full bg-gray-50 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-100">{category}</Link>
         </div>
         <div className="group relative">
-            <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-            <Link to={`/contact/${categoryId}`} title="view contact">
-                <span className="absolute inset-0"></span>
-                Boost your conversion rate
-            </Link>
-            </h3>
-            <p className="mt-5 text-lg  text-gray-600">Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.</p>
+            <p className="mt-5 text-lg  text-gray-600">{description}</p>
         </div>
         <div className="relative mt-8 flex items-center gap-x-4">
             <div className="text-sm leading-6">

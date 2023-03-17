@@ -8,7 +8,7 @@ import hero from '../assets/hero.svg'
 type Props = {}
 
 type ICategory ={
-  category:string
+  category:string,
 }
 
 const inputStyles = 'my-2 w-full px-5 py-3 border border-solid border-neutral-300 bg-transparent bg-clip-padding text-base font-normal text-neutral-700 outline-none placeholder:text-neutral-500'
@@ -20,9 +20,8 @@ const AddCategory:React.FC = (props: Props) => {
    //  const [error,setError] = useState(false)
 
     const handleChange = (e: any) =>{
-      setCategory((prev) =>({ ...prev,[e.target.name]:e.target.value }))
-  }
-
+        setCategory((prev) =>({ ...prev,[e.target.name]:e.target.value }))
+    }
     const handleSubmit = async(e:React.FormEvent<HTMLElement | HTMLTextAreaElement>) =>{
        e.preventDefault()
         try{
@@ -38,7 +37,7 @@ const AddCategory:React.FC = (props: Props) => {
                setCategory({category:""})
                toast.success(data.message);
                setCategories([ ...categories,data.data ])
-               console.log(data)
+              //  console.log(data)
              } else {
                // setError(data);
                toast.error(data);
@@ -97,7 +96,7 @@ const AddCategory:React.FC = (props: Props) => {
             { 
                categories && categories.length > 0 ?
                   categories && categories.map((item:any) =>(
-                     <Category key={item._id} categoryId={item._id} category={item.category} name={item.name} description={item.description} number={item.number}/>
+                     <Category key={item._id} contacts={item.contacts} categoryId={item._id} category={item.category} name={item.name} description={item.description} number={item.number}/>
                   ))
                :
                <p className='text-gray-600 text-lg'>There are no contacts available.</p>
