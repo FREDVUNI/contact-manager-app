@@ -1,7 +1,5 @@
 import React,{ useState,useEffect } from 'react'
-import { toast } from 'react-toastify';
-import { BASE_URL } from '../config';
-import { IContact } from '../types/contact.types'
+import { IContact, IContacts } from '../types/contact.types'
 
 type Props = {
     contact: string,
@@ -10,23 +8,12 @@ type Props = {
 
 const Contacts = ({category,contacts}: IContact) => {
 
-    const [contact,setContact] = useState<Props>()
+    const [contact,setContact] = useState<IContacts[] | undefined>()
 
     useEffect(() =>{
         const getContacts = async() =>{
             try{
-                const res = await fetch(`${BASE_URL}/contact/contacts`)
-                const data =  await res.json()
-
-                if(res.ok){
-                    // const filterContacts = data && data.filter((item:any) => item.category._id === "64141bbd5f687bf2aad8cf4a")
-
-                    // setContact(filterContacts) 
-                    console.log(contacts)
-                    // console.log(data.filter((item:any) => item.category))
-                }else{
-                    toast.error(data)
-                }
+                setContact(contacts)
             }
             catch(error:any){
                 console.log(error)
@@ -36,6 +23,9 @@ const Contacts = ({category,contacts}: IContact) => {
         // console.log(contacts)
     },[])
 
+    let contactsArray = []
+    contactsArray.push(contacts)
+
   return (
     <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -44,18 +34,20 @@ const Contacts = ({category,contacts}: IContact) => {
             <thead className="border-b font-medium dark:border-neutral-500">
                 <tr>
                 <th scope="col" className="px-6 py-4">#</th>
-                <th scope="col" className="px-6 py-4">First</th>
-                <th scope="col" className="px-6 py-4">Last</th>
-                <th scope="col" className="px-6 py-4">Handle</th>
+                <th scope="col" className="px-6 py-4">Name</th>
+                <th scope="col" className="px-6 py-4">Number</th>
                 </tr>
             </thead>
             <tbody>
-                <tr className="border-b dark:border-neutral-500">
-                <td className="whitespace-nowrap px-6 py-4 font-medium">1</td>
-                <td className="whitespace-nowrap px-6 py-4">Mark</td>
-                <td className="whitespace-nowrap px-6 py-4">Otto</td>
-                <td className="whitespace-nowrap px-6 py-4">@mdo</td>
-                </tr>
+                {
+                    contact && contactsArray[0].map((item:any,index:any) =>(
+                    <tr className="border-b dark:border-neutral-500" key={index}>
+                        <td className="whitespace-nowrap px-6 py-4 font-medium">{index + 1}</td>
+                        <td className="whitespace-nowrap px-6 py-4">{item.name}</td>
+                        <td className="whitespace-nowrap px-6 py-4">{item.number}</td>
+                    </tr>
+                    ))
+                }
             </tbody>
             </table>
         </div>

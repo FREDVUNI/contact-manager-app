@@ -27,7 +27,7 @@ const Contact = ({}: Props) => {
 
                 const data = await response.json()
                 if (response.ok) {
-                    console.log(data.data)
+                    // console.log(data.data)
                     setCategory(data.data)
                 } else {
                     // setError(data);
@@ -68,7 +68,7 @@ const Contact = ({}: Props) => {
                 setCategories([...filter,data.data])
 
                 setTitle({title:""})
-                console.log(data)
+                // console.log(data)
             }else{
                 toast.error(data)
             }
@@ -100,7 +100,7 @@ const Contact = ({}: Props) => {
                   </form>
                </div>
             </div>
-            <AddContact category={category.contacts}/>
+            <AddContact category={category.category}/>
         </div>
         <div className="flex lg:flex-col px-12 py-12 md:px-12">
         <Contacts category={category.category} contacts={category.contacts}/>
