@@ -81,7 +81,7 @@ const Contact = ({}: Props) => {
     <div className='grid lg:grid-cols-2 min-h-full bg-white px-6 sm:py-30 lg:px-8'>
         <div className="px-12 py-12 md:px-12 text-gray-800 lg:text-left grid lg:grid-cols-1 gap-12 items-center">
             <div className="container justify-center">
-                <p className='text-xl text-black'>{category.category}</p>
+                <p className='text-xl text-black'>Update Category {category.category}</p>
 
                 <div className="relative mt-5 mb-3 xl:w-97">
                   <form onSubmit={handleSubmit}>

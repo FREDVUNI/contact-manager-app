@@ -1,4 +1,5 @@
 import React,{ useState,useEffect } from 'react'
+import { FaTrash } from 'react-icons/fa';
 import { IContact, IContacts } from '../types/contact.types'
 
 type Props = {
@@ -26,6 +27,10 @@ const Contacts = ({category,contacts}: IContact) => {
     let contactsArray = []
     contactsArray.push(contacts)
 
+    const handleDelete = () =>{
+
+    }
+
   return (
     <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -36,6 +41,7 @@ const Contacts = ({category,contacts}: IContact) => {
                 <th scope="col" className="px-6 py-4">#</th>
                 <th scope="col" className="px-6 py-4">Name</th>
                 <th scope="col" className="px-6 py-4">Number</th>
+                <th scope="col" className="px-6 py-4"></th>
                 </tr>
             </thead>
             <tbody>
@@ -45,6 +51,11 @@ const Contacts = ({category,contacts}: IContact) => {
                         <td className="whitespace-nowrap px-6 py-4 font-medium">{index + 1}</td>
                         <td className="whitespace-nowrap px-6 py-4">{item.name}</td>
                         <td className="whitespace-nowrap px-6 py-4">{item.number}</td>
+                        <td className="whitespace-nowrap ">
+                        <span onClick={handleDelete} title={`Delete ${item.name}`} className="cursor-pointer z-10 bg-gray-150 font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">
+                            <FaTrash/>
+                        </span>
+                        </td>
                     </tr>
                     ))
                 }

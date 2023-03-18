@@ -52,7 +52,7 @@ const AddContact = ({category}: Props) => {
     }
   return (
     <div className="container">
-        <p className='text-xl text-black'>Contact</p>
+        <p className='text-xl text-black'>Create Contact</p>
         <div className="relative mt-5 mb-3 xl:w-98">
             <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 gap-2 lg:grid-cols-1">

@@ -80,7 +80,7 @@ type contacts={
     return (
     <article className="flex max-w-xl flex-col items-start justify-between">
     <div className="flex items-center gap-x-4 text-xs">
-        <Link to={`/contact/${categoryId}`} title="view contact" className="relative z-10 rounded-full bg-gray-50 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-100">
+        <Link to={`/contact/${categoryId}`} title={`view  ${category.toLocaleLowerCase()} contacts`} className="relative z-10 rounded-full bg-gray-50 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-100">
         {category}</Link>
     </div>
     <div className="group relative">
@@ -92,12 +92,12 @@ type contacts={
         <div className="text-sm leading-6">
             <div className='flex text-lg mt-5 gap-3'>
                 <span className="z-10 bg-gray-150 py-1.5 px-3 font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">
-                <Link to={`/contact/${categoryId}`} title="view contact">
-                <FaEye/>
+                <Link to={`/contact/${categoryId}`} title={`view  ${category.toLocaleLowerCase()} contacts`}>
+                    <FaEye/>
                 </Link>
                 </span>
-                <span onClick={handleDelete} title="delete category" className="cursor-pointer z-10 bg-gray-150 py-1.5 px-3 font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">
-                <FaTrash/>
+                <span onClick={handleDelete} title={`Delete category ${category}`} className="cursor-pointer z-10 bg-gray-150 py-1.5 px-3 font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">
+                    <FaTrash/>
                 </span>
             </div>
         </div>
