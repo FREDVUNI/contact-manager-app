@@ -46,8 +46,12 @@ type contacts={
     },[categoryId])
     // const filterContacts = contacts && contacts.filter((item:contacts) => item.category)
     // setContact(filterContacts)
+    console.log(contacts.map((item:any) => item))
     // console.log(filterContacts.map((c:contacts) =>( c.name,c.category,c.description,c.name)))
     // console.log(filterContacts)
+    const filterContacts = arrayContacts && arrayContacts.filter((item:any) => item.category === contacts.map((item:any) => item._id))
+    console.log(filterContacts)
+
     const handleDelete = async(e:any) =>{
     e.preventDefault()
     try{
@@ -79,20 +83,13 @@ type contacts={
         <Link to={`/contact/${categoryId}`} title="view contact" className="relative z-10 rounded-full bg-gray-50 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-100">
         {category}</Link>
     </div>
-    {
-    arrayContacts.map((item:any) =>(
-    <>
     <div className="group relative">
-        <p className="mt-5 text-lg  text-gray-600">{item.description}</p>
+        <p className="mt-5 text-lg  text-gray-600">
+        With Contact Manger, you can manage all of your contacts in one place, making it easier than ever to stay in touch with friends, family,
+        </p>
     </div>
     <div className="relative mt-8 flex items-center gap-x-4">
         <div className="text-sm leading-6">
-            <p className="font-semibold text-gray-900">
-                <a href="#">
-                <span className="absolute inset-0"></span>
-                {item.name}
-                </a>
-            </p>
             <div className='flex text-lg mt-5 gap-3'>
                 <span className="z-10 bg-gray-150 py-1.5 px-3 font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">
                 <Link to={`/contact/${categoryId}`} title="view contact">
@@ -105,9 +102,6 @@ type contacts={
             </div>
         </div>
     </div>
-    </>
-    ))
-    }
     </article>
     )
 }
