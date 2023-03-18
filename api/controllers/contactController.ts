@@ -70,5 +70,35 @@ export const getContacts = async (req: Request, res: Response) => {
     } catch (error: any) {
       res.status(500).json({ error: error.message });
     }
-  }
+}
+
+export const deleteContact = async (req:Request,res:Response) => {
+    try{
+        const { contactId } = req.body
+
+        if(!contactId) return res.status(400).json(`The contact Id is reqiured.`)
+
+        const contacts = await Contact.findOne({
+            _id: contactId
+        })
+
+        if(!contacts) return res.status(404).json(`The contact was not found.`)
+
+        const contact = await Contact.findByIdAndDelete(contactId)
+
+        if(contact){
+            return res.status(200).json({
+                success:true,
+                data:contact,
+                message:'contact has been deleted.'
+            })
+        }else{
+            return res.status(404).json('contact was not found.')
+        } 
+
+    }
+    catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+}
   

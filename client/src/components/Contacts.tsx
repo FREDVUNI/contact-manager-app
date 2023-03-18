@@ -1,5 +1,6 @@
 import React,{ useState,useEffect } from 'react'
 import { FaTrash } from 'react-icons/fa';
+import { BASE_URL } from '../config';
 import { IContact, IContacts } from '../types/contact.types'
 
 type Props = {
@@ -21,14 +22,28 @@ const Contacts = ({category,contacts}: IContact) => {
             }
         }
         getContacts()
-        // console.log(contacts)
+        console.log(category)
     },[])
 
     let contactsArray = []
     contactsArray.push(contacts)
 
-    const handleDelete = () =>{
+    const handleDelete = async(e:any) =>{
+        e.preventDefault()
+        try{
+            const res = await fetch(`${BASE_URL}/contact/delete`,{
+                method:"DELETE",
+                mode:"cors",
+                body: JSON.stringify({category}),
+                headers:{
+                    "content-type":"application/json"
+                }
 
+            })
+        }
+        catch(error){
+            console.log(error)
+        }
     }
 
   return (
