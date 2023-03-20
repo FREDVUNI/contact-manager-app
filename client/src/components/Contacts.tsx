@@ -22,19 +22,19 @@ const Contacts = ({category,contacts}: IContact) => {
             }
         }
         getContacts()
-        console.log(category)
+        // console.log(contacts)
     },[])
 
     let contactsArray = []
     contactsArray.push(contacts)
 
     const handleDelete = async(e:any) =>{
-        e.preventDefault()
+        
         try{
             const res = await fetch(`${BASE_URL}/contact/delete`,{
                 method:"DELETE",
                 mode:"cors",
-                body: JSON.stringify({category}),
+                body: JSON.stringify({}),
                 headers:{
                     "content-type":"application/json"
                 }
