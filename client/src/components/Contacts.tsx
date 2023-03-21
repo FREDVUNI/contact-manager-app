@@ -28,7 +28,7 @@ const Contacts = ({category,contacts}: IContact) => {
         const contactId = contacts.filter((item:any) => item.category._id === categoryId)
         console.log(category)
 
-        console.log(contacts)
+        // console.log(contacts)
     },[contacts])
 
     const handleDelete = async(e:any) =>{
