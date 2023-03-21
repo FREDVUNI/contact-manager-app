@@ -1,13 +1,15 @@
 import React,{ useState } from 'react'
 import { toast } from 'react-toastify'
 import { BASE_URL } from '../config'
+import { ICategory } from '../types/category.types'
 import { INewContact } from '../types/contact.types'
 
 type Props = {
-    category:string
+    category:string,
+    setCategory: (category: ICategory) => void;
 }
 
-const AddContact = ({category}: Props) => {
+const AddContact = ({category,setCategory}: Props) => {
     const inputStyles = 'my-2 w-full px-5 py-3 border border-solid border-neutral-300 bg-transparent bg-clip-padding text-base font-normal text-neutral-700 outline-none placeholder:text-neutral-500'
     const [contact,setContact] = useState<INewContact>({
         name:"",
@@ -23,7 +25,6 @@ const AddContact = ({category}: Props) => {
     const handleSubmit = async(e: React.FormEvent<HTMLFormElement | HTMLTextAreaElement>) =>{
         e.preventDefault();
         try{
-            console.log(contact)
             const response = await fetch(`${BASE_URL}/contact/add`,{
                 method:"POST",
                 body:JSON.stringify(contact),
@@ -41,6 +42,13 @@ const AddContact = ({category}: Props) => {
                     description:"",
                     category:""
                 })
+                const newContact = {
+                    ...contact,
+                    // name: newCategoryName,
+                  };
+              
+                  // Call the setCategory prop with the new category object to update the parent state
+                //   setCategory(newCategory);
             }else{
                 toast.error(data)
             }

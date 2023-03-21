@@ -13,10 +13,10 @@ type Props = {
     description:string,
     categoryId:string,
     index:number,
-    contacts:contacts[]
+    contacts:Contacts[]
 }
 
-type contacts={
+type Contacts={
     _id:string,
     category:string,
     name:string,
@@ -24,10 +24,7 @@ type contacts={
     description:string,
 }
     const Category = ({category,categoryId,name,number,description,contacts,index}: Props) => {
-        const [contact,setContact] = useState()
-        const arrayContacts = []
-        arrayContacts.push(contacts[index])
-
+        const [contact,setContact] = useState<Contacts[]>([])
         const { categories,setCategories } = useContext(CategoriesContext)
 
         useEffect(() =>{
@@ -36,21 +33,17 @@ type contacts={
                 const res = await fetch(`${BASE_URL}/contact/contacts`)
                 const data = await res.json()
                 setContact(data)
-                console.log(contacts)
             }
             catch(error:any){
                 console.log(error)
             }
         }
-    getContacts()
-    },[categoryId])
-    // const filterContacts = contacts && contacts.filter((item:contacts) => item.category)
-    // setContact(filterContacts)
-    console.log(contacts.map((item:any) => item))
-    // console.log(filterContacts.map((c:contacts) =>( c.name,c.category,c.description,c.name)))
-    // console.log(filterContacts)
-    const filterContacts = arrayContacts && arrayContacts.filter((item:any) => item.category === contacts.map((item:any) => item._id))
-    console.log(filterContacts)
+        getContacts()
+        },[categoryId])
+        
+    const arrayContacts = []
+    arrayContacts.push(contact)
+    console.log(contact.filter((item:any) => item.category._id === categoryId))
 
     const handleDelete = async(e:any) =>{
     e.preventDefault()
@@ -103,6 +96,7 @@ type contacts={
         </div>
     </div>
     </article>
+
     )
 }
 export default Category

@@ -8,14 +8,25 @@ import AddContact from './AddContact'
 import Contacts from './Contacts'
 import { IContact } from '../types/contact.types'
 
-type Props = {}
+type Props = {
+    title:string,
+    categoryId:string
+}
 
 const Contact = ({}: Props) => {
     const inputStyles = 'my-2 w-full px-5 py-3 border border-solid border-neutral-300 bg-transparent bg-clip-padding text-base font-normal text-neutral-700 outline-none placeholder:text-neutral-500'
     const { categoryId } = useParams<{categoryId:string}>()
     const navigate = useNavigate()
 
-    const [category,setCategory] = useState<ICategory>({category:"",categoryId:"",description:"",name:"",number:"",contacts:[]})
+    const [category, setCategory] = useState<ICategory>({
+        category: '',
+        categoryId: '',
+        description: '',
+        name: '',
+        number: '',
+        contacts: [],
+      });
+      
     const [title,setTitle] = useState<ITitle>({title:""})
     const [contacts,setContacts] = useState<IContact>()
     const { setCategories,categories } = useContext(CategoriesContext)
@@ -100,7 +111,7 @@ const Contact = ({}: Props) => {
                   </form>
                </div>
             </div>
-            <AddContact category={category.category}/>
+            <AddContact category={category.category} setCategory={setCategory}/>
         </div>
         <div className="flex lg:flex-col px-12 py-12 md:px-12">
         <Contacts category={category.category} contacts={category.contacts}/>
