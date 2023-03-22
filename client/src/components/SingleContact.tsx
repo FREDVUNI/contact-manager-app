@@ -3,19 +3,20 @@ import { FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { BASE_URL } from '../config';
 import { ContactContext } from '../context';
+import { IContacts } from '../types/contact.types';
 
 type Props = {
     name:string,
     number:string,
     contactId:string,
     index:string,
+    contact: IContacts[]
 }
 
-const SingleContact = ({name,number,contactId,index}: Props) => {
+const SingleContact = ({name,number,contactId,index,contact}: Props) => {
 
     const { contacts,setContacts } = useContext(ContactContext)
-    const filter = contacts && contacts.filter((item:any) => item._id !== contactId)
-    console.log(filter)
+
     const handleDelete = async(e:any) =>{
         try{
             const res = await fetch(`${BASE_URL}/contact/delete`,{
@@ -29,17 +30,21 @@ const SingleContact = ({name,number,contactId,index}: Props) => {
             })
             const data = await res.json()
                 if (res.ok) {
-                toast.success(data.message);
-                console.log(data.data)
-                setContacts([...filter,data.data])
-            } else {
-                toast.error(data.data);
+                    toast.success(data.message);
+
+                    const filter = contact && contact.filter((item:any) => item._id !== data.data._id)
+
+                    setContacts([...filter,data.data])
+                    console.log(filter)
+                } else {
+                    toast.error(data.data);
+                }
             }
-            }
-            catch(error){
-                return console.log(error)
-            }
+        catch(error){
+            return console.log(error)
+        }
     }
+
   return (
         <tr className="border-b dark:border-neutral-500">
             <td className="whitespace-nowrap px-6 py-4 font-medium">{index}</td>

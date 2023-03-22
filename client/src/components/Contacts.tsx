@@ -1,19 +1,22 @@
-import React,{ useState,useEffect } from 'react'
+import React,{ useState,useEffect,useContext } from 'react'
 import { useParams } from 'react-router-dom';
 import { IContact, IContacts } from '../types/contact.types'
 import NotFoundSvg from '../assets/NotFound.svg'
 import Loader from '../loader/Loader'
 import SingleContact from './SingleContact';
+import { ContactContext } from '../context';
 
 const Contacts = ({contacts}: IContact) => {
 
     const [contact,setContact] = useState<IContacts[]>()
+    const {setContacts} = useContext(ContactContext)
     const { categoryId } = useParams<{categoryId:string}>()
 
     useEffect(() =>{
         const getContacts = async() =>{
             try{
                 setContact(contacts.filter((item:any) => item.category === categoryId))
+                setContacts(contacts.filter((item:any) => item.category === categoryId))
             }
             catch(error:any){
                 console.log(error)
@@ -40,7 +43,7 @@ const Contacts = ({contacts}: IContact) => {
                     </thead>
                     <tbody>
                         {contact && contact.map((item:any,index:any) =>(
-                            <SingleContact key={index} index={index + 1} name={item.name} number={item.number} contactId={item._id}/>
+                            <SingleContact contact={contact} key={index} index={index + 1} name={item.name} number={item.number} contactId={item._id}/>
                         ))
                         }
                     </tbody>

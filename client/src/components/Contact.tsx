@@ -79,6 +79,7 @@ const Contact = ({}: Props) => {
                 setCategories([...filter,data.data])
 
                 setTitle({title:""})
+                // console.log(data)
             }else{
                 toast.error(data)
             }
