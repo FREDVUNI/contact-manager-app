@@ -4,7 +4,6 @@ import { FaTrash,FaEye } from 'react-icons/fa'
 import { BASE_URL } from '../config'
 import { toast } from 'react-toastify'
 import { CategoriesContext } from '../context'
-import { ICategory } from '../types/category.types'
 
 type Props = {
     category:string,
@@ -46,29 +45,28 @@ type Contacts={
     console.log(contact.filter((item:any) => item.category._id === categoryId))
 
     const handleDelete = async(e:any) =>{
-    e.preventDefault()
-    try{
-        const res = await fetch(`${BASE_URL}/category/delete`,{
-        method:"DELETE",
-        mode: 'cors',
-        body: JSON.stringify({categoryId}),
-        headers:{
-        "Content-Type":"application/json"
+        e.preventDefault()
+        try{
+            const res = await fetch(`${BASE_URL}/category/delete`,{
+            method:"DELETE",
+            mode: 'cors',
+            body: JSON.stringify({categoryId}),
+            headers:{
+            "Content-Type":"application/json"
+            }
+        })
+        const data = await res.json()
+        if (res.ok) {
+            toast.success(data.message);
+            const filterCatgory = categories && categories.filter((item:any) => item._id != categoryId)
+            // console.log(filterCatgory)
+            return setCategories(filterCatgory)
+        } else {
+            toast.error(data);
         }
-    })
-    const data = await res.json()
-    if (res.ok) {
-    toast.success(data.message);
-    const filterCatgory = categories && categories.filter((item:any) => item._id != categoryId)
-    // console.log(filterCatgory)
-    return setCategories(filterCatgory)
-    } else {
-        toast.error(data);
-    }
-    }
-    catch(error){
-        return console.log(error)
-    }
+        }catch(error){
+            return console.log(error)
+        }
     }
     return (
     <article className="flex max-w-xl flex-col items-start justify-between">
@@ -96,7 +94,6 @@ type Contacts={
         </div>
     </div>
     </article>
-
     )
 }
 export default Category

@@ -44,11 +44,7 @@ const AddContact = ({category,setCategory}: Props) => {
                 })
                 const newContact = {
                     ...contact,
-                    // name: newCategoryName,
                   };
-              
-                  // Call the setCategory prop with the new category object to update the parent state
-                //   setCategory(newCategory);
             }else{
                 toast.error(data)
             }
