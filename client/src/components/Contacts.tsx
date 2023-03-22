@@ -40,7 +40,7 @@ const Contacts = ({contacts}: IContact) => {
                     </thead>
                     <tbody>
                         {contact && contact.map((item:any,index:any) =>(
-                            <SingleContact key={index} index={index + 1} contact={contact} name={item.name} number={item.number} contactId={item._id} setContact={contact}/>
+                            <SingleContact key={index} index={index + 1} name={item.name} number={item.number} contactId={item._id}/>
                         ))
                         }
                     </tbody>

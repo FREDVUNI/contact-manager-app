@@ -1,22 +1,21 @@
-import React,{ useState } from 'react'
+import React,{ useContext } from 'react'
 import { FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { BASE_URL } from '../config';
-import { IContacts } from '../types/contact.types';
+import { ContactContext } from '../context';
 
 type Props = {
     name:string,
     number:string,
     contactId:string,
     index:string,
-    contact: IContacts[],
-    setContact: IContacts[]
 }
 
-const SingleContact = ({name,number,contactId,index,contact}: Props) => {
-    const [contacts,setContacts] = useState(contact)
-    console.log(contacts)
+const SingleContact = ({name,number,contactId,index}: Props) => {
 
+    const { contacts,setContacts } = useContext(ContactContext)
+    const filter = contacts && contacts.filter((item:any) => item._id !== contactId)
+    console.log(filter)
     const handleDelete = async(e:any) =>{
         try{
             const res = await fetch(`${BASE_URL}/contact/delete`,{
@@ -32,7 +31,6 @@ const SingleContact = ({name,number,contactId,index,contact}: Props) => {
                 if (res.ok) {
                 toast.success(data.message);
                 console.log(data.data)
-                const filter = contacts && contacts.filter((item:any) => item._id !== data.data._id)
                 setContacts([...filter,data.data])
             } else {
                 toast.error(data.data);
@@ -44,7 +42,7 @@ const SingleContact = ({name,number,contactId,index,contact}: Props) => {
     }
   return (
         <tr className="border-b dark:border-neutral-500">
-            <td className="whitespace-nowrap px-6 py-4 font-medium">{index }</td>
+            <td className="whitespace-nowrap px-6 py-4 font-medium">{index}</td>
             <td className="whitespace-nowrap px-6 py-4">{name}</td>
             <td className="whitespace-nowrap px-6 py-4">{number}</td>
             <td className="whitespace-nowrap ">

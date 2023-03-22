@@ -16,3 +16,8 @@ export type IContacts = {
     description:string,
     createdAt:string,
 }
+
+export interface ContactContextType {
+    contacts: any;
+    setContacts: (contacts: any) => void;
+}
