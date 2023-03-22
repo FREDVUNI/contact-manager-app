@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { BASE_URL } from '../config';
 import { IContact, IContacts } from '../types/contact.types'
 import NotFoundSvg from '../assets/NotFound.svg'
+import Loader from '../loader/Loader'
 
 type Props = {
     contact: string,
@@ -85,12 +86,23 @@ const Contacts = ({category,contacts}: IContact) => {
                 </div>
                 </div>
             </div>
-        ): <div className="flex flex-col justify-center items-center">
-        <img src={NotFoundSvg} alt="not-found" className="h-48 w-48 text-gray-400 mb-8" />
-        <h1 className="text-4xl font-bold text-gray-700 mb-4">No contacts Found</h1>
-
-        <p className="text-lg text-gray-600 mb-8">There are no contacts under this category.</p>
-        </div>
+        ):
+        (
+            <div className="flex flex-col justify-center items-center h-screen">
+                <Loader/>
+            </div>
+        )
+        ?(
+            <div className="flex flex-col justify-center items-center">
+            <img src={NotFoundSvg} alt="not-found" className="h-48 w-48 text-gray-400 mb-8" />
+            <h1 className="text-4xl font-bold text-gray-700 mb-4">No contacts Found</h1>
+            <p className="text-lg text-gray-600 mb-8">There are no contacts under this category.</p>
+            </div>
+        ):(
+            <div className="flex flex-col justify-center items-center h-screen">
+                <Loader/>
+            </div>
+        )
     }
     </>
 )
