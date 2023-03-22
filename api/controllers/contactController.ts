@@ -84,7 +84,7 @@ export const deleteContact = async (req:Request,res:Response) => {
 
         if(!contacts) return res.status(404).json(`The contact was not found.`)
 
-        const contact = await Contact.findByIdAndDelete(contactId)
+        const contact = await Contact.findByIdAndDelete(contactId,{safe:true,multi:false,new:true})
 
         if(contact){
             return res.status(200).json({

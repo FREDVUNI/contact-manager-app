@@ -54,7 +54,7 @@ export const deleteCategory = async(req:Request,res:Response) =>{
 
         if(!categories) return res.status(404).json('category was not found.')
 
-        const category = await Category.findByIdAndDelete(categoryId)
+        const category = await Category.findByIdAndDelete(categoryId,{safe:true,multi:false,new:true})
 
         if(category){
             return res.status(200).json({
