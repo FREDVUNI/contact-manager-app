@@ -16,7 +16,6 @@ const Contacts = ({contacts}: IContact) => {
         const getContacts = async() =>{
             try{
                 setContact(contacts.filter((item:any) => item.category === categoryId))
-                setContacts(contacts.filter((item:any) => item.category === categoryId))
             }
             catch(error:any){
                 console.log(error)
@@ -40,7 +39,7 @@ const Contacts = ({contacts}: IContact) => {
                         <th scope="col" className="px-6 py-4">Number</th>
                         <th scope="col" className="px-6 py-4"></th>
                         </tr>
-                    </thead>
+                    </thead> 
                     <tbody>
                         {contact && contact.map((item:any,index:any) =>(
                             <SingleContact contact={contact} key={index} index={index + 1} name={item.name} number={item.number} contactId={item._id}/>

@@ -1,6 +1,7 @@
-import React,{ useState } from 'react'
+import React,{ useContext, useState } from 'react'
 import { toast } from 'react-toastify'
 import { BASE_URL } from '../config'
+import { CategoriesContext } from '../context'
 import { ICategory } from '../types/category.types'
 import { INewContact } from '../types/contact.types'
 
@@ -9,8 +10,10 @@ type Props = {
     setCategory: (category: ICategory) => void;
 }
 
+
 const AddContact = ({category,setCategory}: Props) => {
     const inputStyles = 'my-2 w-full px-5 py-3 border border-solid border-neutral-300 bg-transparent bg-clip-padding text-base font-normal text-neutral-700 outline-none placeholder:text-neutral-500'
+    const {categories,setCategories} = useContext(CategoriesContext)
     const [contact,setContact] = useState<INewContact>({
         name:"",
         number:"",
@@ -42,9 +45,14 @@ const AddContact = ({category,setCategory}: Props) => {
                     description:"",
                     category:""
                 })
-                const newContact = {
-                    ...contact,
-                  };
+
+                const newContact = [
+                    ...categories,
+                    data.data
+                ];
+                
+                setCategories(newContact)
+                console.log(categories)
             }else{
                 toast.error(data)
             }
