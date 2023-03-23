@@ -9,13 +9,15 @@ import { ContactContext } from '../context';
 const Contacts = ({contacts}: IContact) => {
 
     const [contact,setContact] = useState<IContacts[]>()
-    const {setContacts} = useContext(ContactContext)
+    const {setCategoryContacts,categoryContacts} = useContext(ContactContext)
     const { categoryId } = useParams<{categoryId:string}>()
 
     useEffect(() =>{
         const getContacts = async() =>{
             try{
                 setContact(contacts.filter((item:any) => item.category === categoryId))
+                setCategoryContacts(contact)
+                console.log(categoryContacts)
             }
             catch(error:any){
                 console.log(error)
@@ -42,7 +44,7 @@ const Contacts = ({contacts}: IContact) => {
                     </thead> 
                     <tbody>
                         {contact && contact.map((item:any,index:any) =>(
-                            <SingleContact contact={contact} key={index} index={index + 1} name={item.name} number={item.number} contactId={item._id}/>
+                            <SingleContact setCategoryContacts={contacts.filter((item:any) => item.category === categoryId)} categoryContacts={contact} key={index} index={index + 1} name={item.name} number={item.number} contactId={item._id}/>
                         ))
                         }
                     </tbody>

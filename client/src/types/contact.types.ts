@@ -18,6 +18,6 @@ export type IContacts = {
 }
 
 export interface ContactContextType {
-    contacts: any;
-    setContacts: (contacts: any) => void;
+    categoryContacts: any;
+    setCategoryContacts: (contacts: any) => void;
 }

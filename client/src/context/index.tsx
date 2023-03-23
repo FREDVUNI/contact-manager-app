@@ -1,7 +1,7 @@
 import React, { useState, createContext, useEffect } from 'react'
 import { BASE_URL } from '../config';
 import { CategoriesContextType } from '../types/category.types';
-import { ContactContextType } from '../types/contact.types';
+import { ContactContextType, IContacts } from '../types/contact.types';
 
 type Props = {
   children: React.ReactNode,
@@ -13,13 +13,13 @@ export const CategoriesContext = createContext<CategoriesContextType>({
 });
 
 export const ContactContext = createContext<ContactContextType>({
-  contacts: null,
-  setContacts: () =>{}
+  categoryContacts: null,
+  setCategoryContacts: () =>{}
 })
 
 export const CategoriesProvider = ({children}:Props) => {
     const [categories, setCategories] = useState<any>(null);
-    const [contacts, setContacts] = useState<any>(null);
+    const [categoryContacts, setCategoryContacts] = useState<IContacts[]>();
 
     useEffect(() =>{
       const getCategories = async() =>{
@@ -38,7 +38,7 @@ export const CategoriesProvider = ({children}:Props) => {
         try{
           const response = await fetch(`${BASE_URL}/contact/contacts`)
           const data = await response.json()
-          setContacts(data)
+          setCategoryContacts(data)
         }
         catch(error){
           console.log(error)
@@ -49,7 +49,7 @@ export const CategoriesProvider = ({children}:Props) => {
 
   return (
         <CategoriesContext.Provider value={{ categories, setCategories }}>
-          <ContactContext.Provider value={{ contacts, setContacts }}>
+          <ContactContext.Provider value={{ categoryContacts, setCategoryContacts }}>
             {children}
           </ContactContext.Provider>
         </CategoriesContext.Provider>

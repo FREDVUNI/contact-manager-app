@@ -1,8 +1,7 @@
-import React,{ useContext } from 'react'
+import React from 'react'
 import { FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { BASE_URL } from '../config';
-import { ContactContext } from '../context';
 import { IContacts } from '../types/contact.types';
 
 type Props = {
@@ -10,13 +9,11 @@ type Props = {
     number:string,
     contactId:string,
     index:string,
-    contact: IContacts[]
+    categoryContacts: IContacts[],
+    setCategoryContacts: IContacts[]
 }
 
-const SingleContact = ({name,number,contactId,index,contact}: Props) => {
-
-    const { contacts,setContacts } = useContext(ContactContext)
-
+const SingleContact = ({name,number,contactId,index,categoryContacts,setCategoryContacts}: Props) => {
     const handleDelete = async(e:any) =>{
         try{
             const res = await fetch(`${BASE_URL}/contact/delete`,{
@@ -31,10 +28,11 @@ const SingleContact = ({name,number,contactId,index,contact}: Props) => {
             const data = await res.json()
                 if (res.ok) {
                     toast.success(data.message);
+                    console.log(data.data)
 
-                    const filter = contact && contact.filter((item:any) => item._id !== data.data._id)
-
-                    setContacts([...filter,data.data])
+                    const filter = categoryContacts && categoryContacts.filter((item:any) => item._id !== data.data._id)
+                    // setCategoryContacts(filter)
+                    console.log(categoryContacts)
                     console.log(filter)
                 } else {
                     toast.error(data.data);
