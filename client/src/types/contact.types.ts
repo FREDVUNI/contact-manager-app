@@ -11,6 +11,8 @@ export interface IContact{
 }
 
 export type IContacts = {
+    category: string | undefined;
+    _id: string;
     name:string,
     number:string,
     description:string,

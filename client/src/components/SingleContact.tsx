@@ -9,11 +9,12 @@ type Props = {
     number:string,
     contactId:string,
     index:string,
-    categoryContacts: IContacts[],
-    setCategoryContacts: IContacts[]
+    categoryId:any,
+    contacts: IContacts[],
+    setCategoryContacts: (item:any) => IContacts[],
 }
 
-const SingleContact = ({name,number,contactId,index,categoryContacts,setCategoryContacts}: Props) => {
+const SingleContact = ({name,number,contactId,index,setCategoryContacts,contacts,categoryId}: Props) => {
     const handleDelete = async(e:any) =>{
         try{
             const res = await fetch(`${BASE_URL}/contact/delete`,{
@@ -30,9 +31,10 @@ const SingleContact = ({name,number,contactId,index,categoryContacts,setCategory
                     toast.success(data.message);
                     console.log(data.data)
 
-                    const filter = categoryContacts && categoryContacts.filter((item:any) => item._id !== data.data._id)
-                    // setCategoryContacts(filter)
-                    console.log(categoryContacts)
+                    const filter = contacts && contacts.filter((item:any) => item._id !== data.data._id)
+                    // setcontacts(filter)
+                    setCategoryContacts(filter)
+                    console.log(contacts)
                     console.log(filter)
                 } else {
                     toast.error(data.data);
@@ -42,7 +44,7 @@ const SingleContact = ({name,number,contactId,index,categoryContacts,setCategory
             return console.log(error)
         }
     }
-
+    console.log(contacts)
   return (
         <tr className="border-b dark:border-neutral-500">
             <td className="whitespace-nowrap px-6 py-4 font-medium">{index}</td>

@@ -14,12 +14,12 @@ export const CategoriesContext = createContext<CategoriesContextType>({
 
 export const ContactContext = createContext<ContactContextType>({
   categoryContacts: null,
-  setCategoryContacts: () =>{}
+  setCategoryContacts: () => {}
 })
 
 export const CategoriesProvider = ({children}:Props) => {
     const [categories, setCategories] = useState<any>(null);
-    const [categoryContacts, setCategoryContacts] = useState<IContacts[]>();
+    const [categoryContacts, setCategoryContacts] = useState<any>();
 
     useEffect(() =>{
       const getCategories = async() =>{

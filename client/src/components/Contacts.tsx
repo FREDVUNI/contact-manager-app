@@ -15,7 +15,7 @@ const Contacts = ({contacts}: IContact) => {
     useEffect(() =>{
         const getContacts = async() =>{
             try{
-                setContact(contacts.filter((item:any) => item.category === categoryId))
+                setContact(contacts.filter((item:IContacts) => item.category === categoryId))
                 setCategoryContacts(contact)
                 console.log(categoryContacts)
             }
@@ -43,8 +43,8 @@ const Contacts = ({contacts}: IContact) => {
                         </tr>
                     </thead> 
                     <tbody>
-                        {contact && contact.map((item:any,index:any) =>(
-                            <SingleContact setCategoryContacts={contacts.filter((item:any) => item.category === categoryId)} categoryContacts={contact} key={index} index={index + 1} name={item.name} number={item.number} contactId={item._id}/>
+                        {categoryContacts && categoryContacts.map((item:any,index:any) =>(
+                            <SingleContact setCategoryContacts={categoryContacts} key={index} index={index + 1} name={item.name} contacts={contacts} number={item.number} categoryId={categoryId} contactId={item._id}/>
                         ))
                         }
                     </tbody>
