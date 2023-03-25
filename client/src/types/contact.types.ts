@@ -6,6 +6,8 @@ export interface INewContact{
 }
 
 export interface IContact{
+    filter(arg0: (item: IContacts) => boolean): unknown;
+    length: number;
     category:string,
     contacts: IContacts[]
 }
