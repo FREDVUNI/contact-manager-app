@@ -60,15 +60,17 @@ const Contacts = ({ contacts }: Props) => {
                   {categoryContacts &&
                     categoryContacts.map((item: any, index: any) => (
                       <SingleContact
-                        setCategoryContacts={categoryContacts}
-                        key={index}
-                        index={index + 1}
-                        name={item.name}
-                        contacts={categoryContacts}
-                        number={item.number}
-                        categoryId={categoryId}
-                        contactId={item._id}
-                      />
+                            setCategoryContacts={categoryContacts}
+                            key={index}
+                            index={index + 1}
+                            name={item.name}
+                            contacts={categoryContacts}
+                            number={item.number}
+                            categoryId={categoryId}
+                            contactId={item._id} 
+                            handleDelete={function (): void {
+                                throw new Error('Function not implemented.');
+                            } }                      />
                     ))}
                 </tbody>
               </table>

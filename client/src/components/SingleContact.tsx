@@ -11,7 +11,8 @@ type Props = {
   index: string,
   categoryId: any,
   contacts: IContacts[],
-  setCategoryContacts: React.Dispatch<React.SetStateAction<IContacts[]>>;
+  setCategoryContacts: React.Dispatch<React.SetStateAction<IContacts[]>>,
+  handleDelete: () => void
 }
 
 const SingleContact = ({ name, number, contactId, index, setCategoryContacts, contacts, categoryId }: Props) => {
