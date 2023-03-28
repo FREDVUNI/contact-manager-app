@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { FaTrash } from 'react-icons/fa';
-import { toast } from 'react-toastify';
-import { BASE_URL } from '../config';
 import { IContacts } from '../types/contact.types';
 
 type Props = {
@@ -12,37 +10,14 @@ type Props = {
   categoryId: any,
   contacts: IContacts[],
   setCategoryContacts: React.Dispatch<React.SetStateAction<IContacts[]>>,
-  handleDelete: () => void
+  handleDelete: (contactId:string) => void
 }
 
-const SingleContact = ({ name, number, contactId, index, setCategoryContacts, contacts, categoryId }: Props) => {
+const SingleContact = ({ name, number, contactId, index, setCategoryContacts, contacts, categoryId,handleDelete }: Props) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
 
-  const handleDelete = async (e: any) => {
-    try {
-      const res = await fetch(`${BASE_URL}/contact/delete`, {
-        method: "DELETE",
-        mode: "cors",
-        body: JSON.stringify({ contactId }),
-        headers: {
-          "Content-Type": "application/json"
-        }
-
-      })
-      const data = await res.json()
-      if (res.ok) {
-        toast.success(data.message);
-        const filter = contacts && contacts.filter((item: any) => item._id !== data.data._id)
-        setCategoryContacts(filter)
-        console.log(contacts)
-        console.log(filter)
-      } else {
-        toast.error(data.data);
-      }
-    }
-    catch (error) {
-      return console.log(error)
-    }
+  const handleClick = () =>{
+    handleDelete(contactId)
   }
 
   const handleSelect = () => {
@@ -58,7 +33,7 @@ const SingleContact = ({ name, number, contactId, index, setCategoryContacts, co
       <td className="whitespace-nowrap px-6 py-4">{name}</td>
       <td className="whitespace-nowrap px-6 py-4">{number}</td>
       <td className="whitespace-nowrap ">
-        <span onClick={handleDelete} title={`Delete ${name}`} className="cursor-pointer z-10 bg-gray-150 font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">
+        <span onClick={handleClick} title={`Delete ${name}`} className="cursor-pointer z-10 bg-gray-150 font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">
           <FaTrash />
         </span>
       </td>
