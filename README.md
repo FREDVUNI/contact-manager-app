@@ -11,6 +11,7 @@ Navigate to the project directory: cd contact-manager
 Install the dependencies: npm install
 Usage
 To use contact Manager, follow these steps:
+<https://www.awesomescreenshot.com/video/15996785?key=83c904be7fd0352764b2e6a919557ec9>
 
 #### Start the application
 
