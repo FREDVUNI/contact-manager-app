@@ -66,7 +66,7 @@ const Contacts = ({ contacts }: Props) => {
         <div className="flex flex-col justify-center items-center h-screen">
           <Loader />
         </div>
-      ) : contact.length > 0 ? (
+      ) : contact.length > 0 && categoryContacts.length > 0 ? (
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
             <div className="overflow-hidden">
