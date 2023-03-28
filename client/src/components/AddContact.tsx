@@ -1,19 +1,23 @@
 import React,{ useContext, useState } from 'react'
 import { toast } from 'react-toastify'
 import { BASE_URL } from '../config'
-import { CategoriesContext } from '../context'
+import { CategoriesContext,ContactContext } from '../context'
 import { ICategory } from '../types/category.types'
-import { INewContact } from '../types/contact.types'
+import { IContact, INewContact } from '../types/contact.types'
 
 type Props = {
     category:string,
     setCategory: (category: ICategory) => void;
+    categoryContacts:string,
+    setCategoryContacts:(contact: IContact) => void;
 }
 
 
 const AddContact = ({category,setCategory}: Props) => {
     const inputStyles = 'my-2 w-full px-5 py-3 border border-solid border-neutral-300 bg-transparent bg-clip-padding text-base font-normal text-neutral-700 outline-none placeholder:text-neutral-500'
     const {categories,setCategories} = useContext(CategoriesContext)
+    const { categoryContacts,setCategoryContacts } = useContext(ContactContext)
+    
     const [contact,setContact] = useState<INewContact>({
         name:"",
         number:"",
@@ -47,12 +51,12 @@ const AddContact = ({category,setCategory}: Props) => {
                 })
 
                 const newContact = [
-                    ...categories,
+                    ...categoryContacts,
                     data.data
                 ];
                 
-                setCategories(newContact)
-                console.log(categories)
+                setCategoryContacts(newContact)
+                console.log(newContact)
             }else{
                 toast.error(data)
             }
