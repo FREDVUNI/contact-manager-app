@@ -11,6 +11,7 @@ Navigate to the project directory: cd contact-manager
 Install the dependencies: npm install
 Usage
 To use contact Manager, follow these steps:
+
 <https://www.awesomescreenshot.com/video/15996785?key=83c904be7fd0352764b2e6a919557ec9>
 
 #### Start the application
@@ -20,6 +21,10 @@ Open a web browser and navigate to <http://localhost:3000>
 
 Create a new contact by clicking on the "Add contact" button and filling out the form
 View, update, or delete contacts by clicking on the corresponding buttons
+
+### screenshot
+![image](https://user-images.githubusercontent.com/41730664/229774853-042fdc26-03b4-480d-9a93-0de158c15245.png)
+
 
 #### Technologies Used
 
